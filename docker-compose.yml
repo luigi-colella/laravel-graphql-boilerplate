@@ -1,6 +1,18 @@
 version: "3.3"
 services:
 
+    app:
+        build:
+            context: ./app
+        restart: always
+        volumes:
+            - "./app:/app"
+        networks:
+            - backend
+        depends_on:
+            - db
+            - server
+
     db:
         image: mysql:8.0
         restart: always
@@ -19,6 +31,12 @@ services:
         restart: always
         ports:
             - "8080:8080"
+        networks:
+            - backend
+
+    server:
+        image: nginx:1.17-alpine
+        restart: always
         networks:
             - backend
 
