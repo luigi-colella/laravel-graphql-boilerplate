@@ -9,9 +9,6 @@ services:
             - "./app:/app"
         networks:
             - backend
-        depends_on:
-            - db
-            - server
 
     db:
         image: mysql:8.0
@@ -25,6 +22,8 @@ services:
             - "33060:33060"
         networks:
             - backend
+        depends_on:
+            - app
     
     adminer:
         image: adminer:4.7
@@ -33,12 +32,19 @@ services:
             - "8080:8080"
         networks:
             - backend
+        depends_on:
+            - db
 
     server:
-        image: nginx:1.17-alpine
+        build:
+            context: ./server
         restart: always
+        ports:
+            - "8000:80"
         networks:
             - backend
+        depends_on:
+            - app
 
 networks:
     backend:
