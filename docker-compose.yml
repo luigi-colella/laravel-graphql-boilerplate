@@ -35,9 +35,9 @@ services:
         depends_on:
             - db
 
-    server:
+    nginx:
         build:
-            context: ./server
+            context: ./nginx
         restart: always
         ports:
             - "8000:80"
