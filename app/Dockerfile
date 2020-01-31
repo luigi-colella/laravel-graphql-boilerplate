@@ -1,6 +1,5 @@
 FROM php:7.4-fpm
 
-WORKDIR /app
-
+WORKDIR /var/www
 COPY ./composer.phar /usr/local/bin/composer
-COPY ./ /app
+COPY ./ /var/www/
