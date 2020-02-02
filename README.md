@@ -14,6 +14,7 @@ Web application boilerplate built with Laravel and GraphQL
 ![GraphQL](https://raw.githubusercontent.com/lgcolella/laravel-graphql-boilerplate/master/repository/graphql.png "GraphQL")
 ![MySQL](https://raw.githubusercontent.com/lgcolella/laravel-graphql-boilerplate/master/repository/mysql.png "MySQL")
 ![Nginx](https://raw.githubusercontent.com/lgcolella/laravel-graphql-boilerplate/master/repository/nginx.png "Nginx")
+![Docker](https://raw.githubusercontent.com/lgcolella/laravel-graphql-boilerplate/master/repository/docker.png "Docker")
 
 ## Requirements
 
