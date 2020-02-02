@@ -6,7 +6,7 @@ services:
             context: ./app
         restart: always
         volumes:
-            - "./app:/app"
+            - "./app:/var/www/app"
         networks:
             - backend
 
