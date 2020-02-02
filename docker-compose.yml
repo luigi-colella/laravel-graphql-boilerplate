@@ -3,10 +3,10 @@ services:
 
     app:
         build:
-            context: ./app
+            context: ./
         restart: always
         volumes:
-            - "./app:/var/www/app"
+            - "./:/var/www/app"
         networks:
             - backend
 
@@ -16,7 +16,7 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: root
         volumes:
-            - "./db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
+            - "./docker/db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
             - "db-data:/var/lib/mysql"
         ports:
             - "33060:33060"
@@ -37,7 +37,7 @@ services:
 
     nginx:
         build:
-            context: ./nginx
+            context: ./docker/nginx
         restart: always
         ports:
             - "8000:80"
