@@ -18,18 +18,25 @@ Web application boilerplate built with Laravel and GraphQL
 
 ## Requirements
 
-You must have only Docker and Docker Compose installed on your system to run and develop this project.
+- Docker Compose >= 3.3
 
 ## Setup
+
+Start the application by using
 
 ```sh
 docker-compose up -d # start app and other services
 docker-compose exec app bash -c "composer install" # install app's dependencies
 ```
 
-Now you can see the application at [localhost:8000](http://localhost:8000/).
+Then you can access to the following links:
 
-If you want manage the database by using a visual tool, you can use Adminer at [localhost:8080](http:localhost:8080).
+Link | Description
+---  | ---
+[localhost:8000](http://localhost:8000/) | Laravel application home
+[localhost:8000/graphql](http://localhost:8000/graphql) | GraphQL endpoint
+[localhost:8000/graphql-playground](http://localhost:8000/graphql-playground) | GraphQL Playground, a tool to test and explore the schema
+[localhost:8080](http:localhost:8080) | Adminer, a visual database manager
 
 > If you installed Docker by Docker Toolbox, you may need to replace `localhost` with the ip returned by `docker-machine ip`.
 
