@@ -19,7 +19,7 @@ services:
             - "./docker/db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
             - "db-data:/var/lib/mysql"
         ports:
-            - "33060:33060"
+            - "3306:3306"
         networks:
             - backend
         depends_on:

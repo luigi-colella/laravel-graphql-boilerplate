@@ -6,4 +6,4 @@ COPY ./ /var/www/app
 
 RUN apt-get update \
     && apt-get install libzip-dev unzip -y \
-    && docker-php-ext-install bcmath zip
+    && docker-php-ext-install bcmath pdo_mysql zip
