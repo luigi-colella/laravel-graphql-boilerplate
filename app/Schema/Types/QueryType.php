@@ -2,8 +2,9 @@
 
 namespace App\Schema\Types;
 
+use App\Models\Customer;
+use App\Schema\Type;
 use GraphQL\Type\Definition\ObjectType;
-use GraphQL\Type\Definition\Type;
 
 class QueryType extends ObjectType
 {
@@ -19,6 +20,21 @@ class QueryType extends ObjectType
                     ],
                     'resolve' => function ($root, $args) {
                         return $root['prefix'] . $args['message'];
+                    }
+                ],
+                'customer' => [
+                    'type' => Type::customer(),
+                    'args' => [
+                        'id' => Type::int(),
+                    ],
+                    'resolve' => function ($root, $args) {
+                        return Customer::find($args['id']);
+                    }
+                ],
+                'customers' => [
+                    'type' => Type::listOf(Type::customer()),
+                    'resolve' => function ($root, $args) {
+                        return Customer::all();
                     }
                 ],
             ],
