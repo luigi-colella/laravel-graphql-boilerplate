@@ -25,6 +25,17 @@ services:
         depends_on:
             - app
 
+    nginx:
+        build:
+            context: ./docker/nginx
+        restart: always
+        ports:
+            - "8000:80"
+        networks:
+            - backend
+        depends_on:
+            - app
+
     graphql-ide:
         build:
             context: ./docker/graphql-ide
@@ -45,17 +56,6 @@ services:
             - backend
         depends_on:
             - db
-
-    nginx:
-        build:
-            context: ./docker/nginx
-        restart: always
-        ports:
-            - "8000:80"
-        networks:
-            - backend
-        depends_on:
-            - app
 
 networks:
     backend:
