@@ -29,13 +29,13 @@ docker-compose up -d # start app and other services
 docker-compose exec app bash -c "composer install" # install app's dependencies
 ```
 
-Then you can access to the following links:
+Then the following endpoints will be available:
 
 Link | Description
 ---  | ---
-[localhost:8000](http://localhost:8000/) | Laravel application home
+[localhost:8000](http://localhost:8000) | Laravel application home
 [localhost:8000/graphql](http://localhost:8000/graphql) | GraphQL endpoint
-[localhost:8000/graphql-playground](http://localhost:8000/graphql-playground) | GraphQL Playground, a tool to test and explore the schema
+[localhost:4000](http://localhost:3000) | GraphQL Playground, a tool to test and explore the schema
 [localhost:8080](http:localhost:8080) | Adminer, a visual database manager
 
 > If you installed Docker by Docker Toolbox, you may need to replace `localhost` with the ip returned by `docker-machine ip`.

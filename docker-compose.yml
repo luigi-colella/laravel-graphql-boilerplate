@@ -24,6 +24,17 @@ services:
             - backend
         depends_on:
             - app
+
+    graphql-ide:
+        build:
+            context: ./docker/graphql-ide
+        restart: always
+        ports:
+            - 4000:80
+        networks:
+            - backend
+        depends_on:
+            - app
     
     adminer:
         image: adminer:4.7
