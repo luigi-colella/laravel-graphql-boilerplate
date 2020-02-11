@@ -24,12 +24,11 @@ class Controller extends BaseController
      */
     public function graphql(Request $request): JsonResponse
     {
-        $schema = new Schema();
-        $query = $request->get('query');
-        $rootValue = ['prefix' => 'You said: '];
-        $variableValues = $request->get('variables');
-
         try {
+            $schema = new Schema();
+            $query = $request->get('query');
+            $rootValue = ['prefix' => 'You said: '];
+            $variableValues = $request->get('variables');
             $output = GraphQL::executeQuery($schema, $query, $rootValue, null, $variableValues)->toArray();
         } catch (\Exception $e) {
             $output = [
