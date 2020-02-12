@@ -3,7 +3,7 @@
 namespace App\Schema\Types;
 
 use App\Models\Customer;
-use App\Schema\Type;
+use App\Schema\TypeRegistry;
 use GraphQL\Type\Definition\ObjectType;
 
 class QueryType extends ObjectType
@@ -14,25 +14,25 @@ class QueryType extends ObjectType
             'name' => 'Query',
             'fields' => [
                 'echo' => [
-                    'type' => Type::string(),
+                    'type' => TypeRegistry::string(),
                     'args' => [
-                        'message' => Type::nonNull(Type::string()),
+                        'message' => TypeRegistry::nonNull(TypeRegistry::string()),
                     ],
                     'resolve' => function ($root, $args) {
                         return $root['prefix'] . $args['message'];
                     }
                 ],
                 'customer' => [
-                    'type' => Type::customer(),
+                    'type' => TypeRegistry::customer(),
                     'args' => [
-                        'id' => Type::int(),
+                        'id' => TypeRegistry::int(),
                     ],
                     'resolve' => function ($root, $args) {
                         return Customer::find($args['id']);
                     }
                 ],
                 'customers' => [
-                    'type' => Type::paginationOf(Type::customer()),
+                    'type' => TypeRegistry::paginationOf(TypeRegistry::customer()),
                     'resolve' => function ($root, $args) {
                         $customers = Customer::all();
                         $lastCustomerId = $customers->last()->customerNumber;

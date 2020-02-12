@@ -3,14 +3,16 @@ namespace App\Schema;
 
 use App\Schema\Types\CustomerType;
 use App\Schema\Types\PaginationOfType;
-use GraphQL\Type\Definition\Type as AbstractType;
+use GraphQL\Type\Definition\Type;
 
 /**
  * Registry of custom GraphQL types
  */
-class Type extends AbstractType
+class TypeRegistry extends Type
 {
-    /** @var CustomerType */
+    /**
+     * @var CustomerType
+     */
     private static $customer;
 
     public static function customer(): CustomerType
@@ -18,7 +20,7 @@ class Type extends AbstractType
         return self::$customer ?: (self::$customer = new CustomerType());
     }
 
-    public static function paginationOf(AbstractType $type): PaginationOfType
+    public static function paginationOf(Type $type): PaginationOfType
     {
         return new PaginationOfType($type);
     }

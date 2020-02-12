@@ -2,7 +2,7 @@
 
 namespace App\Schema\Types;
 
-use App\Schema\Type;
+use App\Schema\TypeRegistry;
 use GraphQL\Type\Definition\ObjectType;
 
 class CustomerType extends ObjectType
@@ -13,19 +13,19 @@ class CustomerType extends ObjectType
             'name' => 'customer',
             'description' => 'Customer info',
             'fields' => [
-                'customerNumber' => Type::id(),
-                'customerName' => Type::string(),
-                'contactLastName' => Type::string(),
-                'contactFirstName' => Type::string(),
-                'phone' => Type::string(),
-                'addressLine1' => Type::string(),
-                'addressLine2' => Type::string(),
-                'city' => Type::string(),
-                'state' => Type::string(),	
-                'postalCode' => Type::string(),
-                'country' => Type::string(),
-                'salesRepEmployeeNumber' => Type::int(),
-                'creditLimit' => Type::float(),
+                'customerNumber' => TypeRegistry::id(),
+                'customerName' => TypeRegistry::string(),
+                'contactLastName' => TypeRegistry::string(),
+                'contactFirstName' => TypeRegistry::string(),
+                'phone' => TypeRegistry::string(),
+                'addressLine1' => TypeRegistry::string(),
+                'addressLine2' => TypeRegistry::string(),
+                'city' => TypeRegistry::string(),
+                'state' => TypeRegistry::string(),	
+                'postalCode' => TypeRegistry::string(),
+                'country' => TypeRegistry::string(),
+                'salesRepEmployeeNumber' => TypeRegistry::int(),
+                'creditLimit' => TypeRegistry::float(),
             ]
         ]);
     }

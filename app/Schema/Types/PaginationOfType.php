@@ -2,9 +2,9 @@
 
 namespace App\Schema\Types;
 
-use App\Schema\Type;
+use App\Schema\TypeRegistry;
 use GraphQL\Type\Definition\ObjectType;
-use GraphQL\Type\Definition\Type as DefinitionType;
+use GraphQL\Type\Definition\Type;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use RuntimeException;
@@ -19,24 +19,24 @@ class PaginationOfType extends ObjectType
     public const FIELD_END_CURSOR = 'endCursor';
     public const FIELD_HAS_NEXT_PAGE = 'hasNextPage';
 
-    public function __construct(DefinitionType $edgeType)
+    public function __construct(Type $type)
     {
         parent::__construct([
             'fields' => [
                 [
                     'name' => self::FIELD_TOTAL_COUNT,
-                    'type' => Type::int(),
+                    'type' => TypeRegistry::int(),
                     'resolve' => function (array $value) {
                         return $value[self::FIELD_TOTAL_COUNT];
                     }
                 ],
                 [
                     'name' => self::FIELD_EDGES,
-                    'type' => Type::listOf(new ObjectType([
+                    'type' => TypeRegistry::listOf(new ObjectType([
                         'name' => 'edge',
                         'fields' => [
-                            'node' => $edgeType,
-                            'cursor' => Type::id(),
+                            'node' => $type,
+                            'cursor' => TypeRegistry::id(),
                         ],
                     ])),
                     'resolve' => function (array $value) {
@@ -59,8 +59,8 @@ class PaginationOfType extends ObjectType
                     'type' => new ObjectType([
                         'name' => 'pageInfo',
                         'fields' => [
-                            self::FIELD_END_CURSOR => Type::id(),
-                            self::FIELD_HAS_NEXT_PAGE => Type::boolean(),
+                            self::FIELD_END_CURSOR => TypeRegistry::id(),
+                            self::FIELD_HAS_NEXT_PAGE => TypeRegistry::boolean(),
                         ]
                     ]),
                     'resolve' => function (array $value) {
