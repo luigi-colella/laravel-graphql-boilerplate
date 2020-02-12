@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Schema\Schema;
+use Exception;
 use GraphQL\GraphQL;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -24,17 +25,17 @@ class Controller extends BaseController
      */
     public function graphql(Request $request): JsonResponse
     {
-        $schema = new Schema();
-        $query = $request->get('query');
-        $rootValue = ['prefix' => 'You said: '];
-        $variableValues = $request->get('variables');
-
         try {
+            $schema = new Schema();
+            $query = $request->get('query');
+            $rootValue = ['prefix' => 'You said: '];
+            $variableValues = $request->get('variables');
             $output = GraphQL::executeQuery($schema, $query, $rootValue, null, $variableValues)->toArray();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $output = [
                 'errors' => [
-                    'message' => $e->getMessage()
+                    'message' => $e->getMessage(),
+                    'trace' => $e->getTrace(),
                 ]
             ];
         }
