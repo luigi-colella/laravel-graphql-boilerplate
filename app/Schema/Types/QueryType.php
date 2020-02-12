@@ -32,9 +32,18 @@ class QueryType extends ObjectType
                     }
                 ],
                 'customers' => [
-                    'type' => Type::listOf(Type::customer()),
+                    'type' => Type::paginationOf(Type::customer()),
                     'resolve' => function ($root, $args) {
-                        return Customer::all();
+                        $customers = Customer::all();
+                        $lastCustomerId = $customers->last()->customerNumber;
+                        $endCustomerId = Customer::select('customerNumber')->orderBy('customerNumber', 'DESC')->first()->customerNumber;
+
+                        return [
+                            PaginationOfType::FIELD_TOTAL_COUNT => Customer::count(),
+                            PaginationOfType::FIELD_EDGES => $customers,
+                            PaginationOfType::FIELD_END_CURSOR => $lastCustomerId,
+                            PaginationOfType::FIELD_HAS_NEXT_PAGE => $lastCustomerId !== $endCustomerId,
+                        ];
                     }
                 ],
             ],
