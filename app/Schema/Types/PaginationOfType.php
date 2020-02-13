@@ -5,9 +5,7 @@ namespace App\Schema\Types;
 use App\Schema\TypeRegistry;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use RuntimeException;
 
 class PaginationOfType extends ObjectType
 {
@@ -35,23 +33,24 @@ class PaginationOfType extends ObjectType
                     'type' => TypeRegistry::listOf(new ObjectType([
                         'name' => 'edge',
                         'fields' => [
-                            'node' => $type,
-                            'cursor' => TypeRegistry::id(),
+                            [
+                                'name' => 'node',
+                                'type'=> $type,
+                                'resolve' => function ($edge) {
+                                    return $edge;
+                                },
+                            ],
+                            [
+                                'name' => 'cursor',
+                                'type' => TypeRegistry::id(),
+                                'resolve' => function (Model $edge) {
+                                    return $edge->getKey();
+                                }
+                            ]
                         ],
                     ])),
                     'resolve' => function (array $value) {
-
-                        $edges = $value[self::FIELD_EDGES];
-                        if (! $edges instanceof Collection) {
-                            throw new RuntimeException('The passed edges are not an instance of Eloquent Collection.');
-                        }
-
-                        return $edges->map(function (Model $edge) {
-                            return (object) [
-                                'node' => $edge,
-                                'cursor' => $edge->getKey(),
-                            ];
-                        });
+                        return $value[self::FIELD_EDGES];
                     }
                 ],
                 [
