@@ -16,7 +16,10 @@ class QueryType extends ObjectType
                 'echo' => [
                     'type' => TypeRegistry::string(),
                     'args' => [
-                        'message' => TypeRegistry::nonNull(TypeRegistry::string()),
+                        'message' => [
+                            'type' => TypeRegistry::nonNull(TypeRegistry::string()),
+                            'description' => 'The message to display'
+                        ],
                     ],
                     'resolve' => function ($root, $args) {
                         return $root['prefix'] . $args['message'];
@@ -25,7 +28,10 @@ class QueryType extends ObjectType
                 'customer' => [
                     'type' => TypeRegistry::customer(),
                     'args' => [
-                        'id' => TypeRegistry::int(),
+                        'id' => [
+                            'type' => TypeRegistry::nonNull(TypeRegistry::int()),
+                            'description' => 'The ID of customer to fetch',
+                        ],
                     ],
                     'resolve' => function ($root, $args) {
                         return Customer::find($args['id']);
@@ -37,10 +43,12 @@ class QueryType extends ObjectType
                         'after' => [
                             'type' => TypeRegistry::id(),
                             'defaultValue' => 1,
+                            'description' => 'The offset after which records will be taken',
                         ],
                         'first' => [
                             'type' => TypeRegistry::int(),
                             'defaultValue' => 10,
+                            'description' => 'The limit of returned records',
                         ],
                     ],
                     'resolve' => function ($root, $args) {
