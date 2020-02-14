@@ -2,6 +2,7 @@
 
 namespace App\Schema\Types;
 
+use App\Schema\ModelPaginator;
 use App\Schema\TypeRegistry;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
@@ -9,27 +10,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class PaginationOfType extends ObjectType
 {
-    /**
-     * The fields of which this type is composed
-     */
-    public const FIELD_TOTAL_COUNT = 'totalCount';
-    public const FIELD_EDGES = 'edges';
-    public const FIELD_END_CURSOR = 'endCursor';
-    public const FIELD_HAS_NEXT_PAGE = 'hasNextPage';
-
     public function __construct(Type $type)
     {
         parent::__construct([
             'fields' => [
                 [
-                    'name' => self::FIELD_TOTAL_COUNT,
+                    'name' => 'totalCount',
                     'type' => TypeRegistry::int(),
-                    'resolve' => function (array $value) {
-                        return $value[self::FIELD_TOTAL_COUNT];
+                    'resolve' => function (ModelPaginator $paginator) {
+                        return $paginator->getTotalCount();
                     }
                 ],
                 [
-                    'name' => self::FIELD_EDGES,
+                    'name' => 'edges',
                     'type' => TypeRegistry::listOf(new ObjectType([
                         'name' => 'edge',
                         'fields' => [
@@ -49,8 +42,8 @@ class PaginationOfType extends ObjectType
                             ]
                         ],
                     ])),
-                    'resolve' => function (array $value) {
-                        return $value[self::FIELD_EDGES];
+                    'resolve' => function (ModelPaginator $paginator) {
+                        return $paginator->getItems();
                     }
                 ],
                 [
@@ -58,14 +51,14 @@ class PaginationOfType extends ObjectType
                     'type' => new ObjectType([
                         'name' => 'pageInfo',
                         'fields' => [
-                            self::FIELD_END_CURSOR => TypeRegistry::id(),
-                            self::FIELD_HAS_NEXT_PAGE => TypeRegistry::boolean(),
+                            'endCursor' => TypeRegistry::id(),
+                            'hasNextPage' => TypeRegistry::boolean(),
                         ]
                     ]),
-                    'resolve' => function (array $value) {
+                    'resolve' => function (ModelPaginator $paginator) {
                         return (object) [
-                            self::FIELD_END_CURSOR => $value[self::FIELD_END_CURSOR],
-                            self::FIELD_HAS_NEXT_PAGE => $value[self::FIELD_HAS_NEXT_PAGE],
+                            'endCursor' => $paginator->getEndCursor(),
+                            'hasNextPage' => $paginator->hasNextPage(),
                         ];
                     }
                 ],
