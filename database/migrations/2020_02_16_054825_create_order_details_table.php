@@ -19,6 +19,8 @@ class CreateOrderDetailsTable extends Migration
             $table->integer('quantityOrdered');
             $table->float('priceEach', 10, 2);
             $table->integer('orderLineNumber');
+
+            $table->engine = 'InnoDB';
         });
     }
 

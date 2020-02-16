@@ -23,6 +23,8 @@ class CreateOfficesTable extends Migration
             $table->string('country', 50);
             $table->string('postalCode', 15);
             $table->string('territory', 10);
+
+            $table->engine = 'InnoDB';
         });
     }
 

@@ -22,6 +22,8 @@ class CreateEmployeesTable extends Migration
             $table->string('officeCode', 10);
             $table->integer('reportsTo')->nullable();
             $table->string('jobTitle', 50);
+
+            $table->engine = 'InnoDB';
         });
     }
 

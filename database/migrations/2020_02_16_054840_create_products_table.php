@@ -23,6 +23,8 @@ class CreateProductsTable extends Migration
             $table->integer('quantityInStock');
             $table->float('buyPrice', 10, 2);
             $table->float('MSRP', 10, 2);
+
+            $table->engine = 'InnoDB';
         });
     }
 

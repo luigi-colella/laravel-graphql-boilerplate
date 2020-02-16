@@ -18,6 +18,8 @@ class CreateProductLinesTable extends Migration
             $table->string('textDescription', 4000)->nullable();
             $table->text('htmlDescription')->nullable();
             $table->binary('image')->nullable();
+
+            $table->engine = 'InnoDB';
         });
     }
 

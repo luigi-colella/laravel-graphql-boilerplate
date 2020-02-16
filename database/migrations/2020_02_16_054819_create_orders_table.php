@@ -21,6 +21,8 @@ class CreateOrdersTable extends Migration
             $table->string('status', 15);
             $table->text('comments')->nullable();
             $table->integer('customerNumber');
+
+            $table->engine = 'InnoDB';
         });
     }
 

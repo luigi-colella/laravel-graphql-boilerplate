@@ -18,6 +18,8 @@ class CreatePaymentsTable extends Migration
             $table->string('checkNumber', 50);
             $table->date('paymentDate');
             $table->float('amount', 10, 2);
+
+            $table->engine = 'InnoDB';
         });
     }
 
