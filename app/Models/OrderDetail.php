@@ -35,7 +35,7 @@ class OrderDetail extends Model
     protected $casts = [
         'productCode' => 'string',
         'quantityOrdered' => 'integer',
-        'priceEach' => 'integer',
+        'priceEach' => 'float',
         'orderLineNumber' => 'integer',
     ];
 }

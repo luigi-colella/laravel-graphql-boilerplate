@@ -39,7 +39,7 @@ class Product extends Model
         'productVendor' => 'string',
         'productDescription' => 'string',
         'quantityInStock' => 'integer',
-        'buyPrice' => 'integer',
-        'MSRP' => 'integer',
+        'buyPrice' => 'float',
+        'MSRP' => 'float',
     ];
 }

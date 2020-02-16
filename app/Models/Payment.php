@@ -35,6 +35,6 @@ class Payment extends Model
     protected $casts = [
         'checkNumber' => 'string',
         'paymentDate' => 'date',
-        'amount' => 'integer',
+        'amount' => 'float',
     ];
 }
