@@ -7,6 +7,7 @@ use App\Schema\Types\OfficeType;
 use App\Schema\Types\OrderDetailType;
 use App\Schema\Types\OrderType;
 use App\Schema\Types\PaginationOfType;
+use App\Schema\Types\PaymentType;
 use GraphQL\Type\Definition\Type;
 
 /**
@@ -31,6 +32,9 @@ class TypeRegistry extends Type
 
     /** @var OrderDetailType */
     private static $orderDetail;
+
+    /** @var PaymentType */
+    private static $payment;
 
     public static function paginationOf(Type $type): PaginationOfType
     {
@@ -61,5 +65,10 @@ class TypeRegistry extends Type
     public static function orderDetail(): OrderDetailType
     {
         return self::$orderDetail ?: (self::$orderDetail = new OrderDetailType());
+    }
+
+    public static function payment(): PaymentType
+    {
+        return self::$payment ?: (self::$payment = new PaymentType());
     }
 }
