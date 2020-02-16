@@ -4,6 +4,7 @@ namespace App\Schema\Types;
 
 use App\Models\Customer;
 use App\Models\Employee;
+use App\Models\Office;
 use App\Schema\FieldRegistry;
 use App\Schema\TypeRegistry;
 use GraphQL\Type\Definition\ObjectType;
@@ -31,6 +32,8 @@ class QueryType extends ObjectType
                 'customers' => FieldRegistry::models(TypeRegistry::customer(), Customer::class),
                 'employee' => FieldRegistry::model(TypeRegistry::employee(), Employee::class),
                 'employees' => FieldRegistry::models(TypeRegistry::employee(), Employee::class),
+                'office' => FieldRegistry::model(TypeRegistry::office(), Office::class),
+                'offices' => FieldRegistry::models(TypeRegistry::office(), Office::class),
             ],
         ]);
     }
