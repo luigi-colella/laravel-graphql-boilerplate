@@ -5,6 +5,7 @@ namespace App\Schema\Types;
 use App\Models\Customer;
 use App\Models\Employee;
 use App\Models\Office;
+use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Schema\FieldRegistry;
 use App\Schema\TypeRegistry;
@@ -35,6 +36,8 @@ class QueryType extends ObjectType
                 'employees' => FieldRegistry::models(TypeRegistry::employee(), Employee::class),
                 'office' => FieldRegistry::model(TypeRegistry::office(), Office::class),
                 'offices' => FieldRegistry::models(TypeRegistry::office(), Office::class),
+                'order' => FieldRegistry::model(TypeRegistry::order(), Order::class),
+                'orders' => FieldRegistry::models(TypeRegistry::order(), Order::class),
                 'orderDetail' => FieldRegistry::model(TypeRegistry::orderDetail(), OrderDetail::class),
                 'orderDetails' => FieldRegistry::models(TypeRegistry::orderDetail(), OrderDetail::class),
             ],

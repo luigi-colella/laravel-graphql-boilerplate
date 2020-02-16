@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->date('requiredDate');
             $table->date('shippedDate')->nullable();
             $table->string('status', 15);
-            $table->text('text')->nullable();
+            $table->text('comments')->nullable();
             $table->integer('customerNumber');
         });
     }

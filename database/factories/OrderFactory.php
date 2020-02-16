@@ -12,6 +12,6 @@ $factory->define(Order::class, function (Faker $faker) {
         'shippedDate' => $faker->date,
         'status' => $faker->word,
         'comments' => $faker->sentence,
-        'customerNumber' => null,
+        'customerNumber' => $faker->randomNumber(),
     ];
 });

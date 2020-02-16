@@ -5,6 +5,7 @@ use App\Schema\Types\CustomerType;
 use App\Schema\Types\EmployeeType;
 use App\Schema\Types\OfficeType;
 use App\Schema\Types\OrderDetailType;
+use App\Schema\Types\OrderType;
 use App\Schema\Types\PaginationOfType;
 use GraphQL\Type\Definition\Type;
 
@@ -24,6 +25,9 @@ class TypeRegistry extends Type
 
     /** @var OfficeType */
     private static $office;
+
+    /** @var OrderType */
+    private static $order;
 
     /** @var OrderDetailType */
     private static $orderDetail;
@@ -47,6 +51,11 @@ class TypeRegistry extends Type
     public static function office(): OfficeType
     {
         return self::$office ?: (self::$office = new OfficeType());
+    }
+
+    public static function order(): OrderType
+    {
+        return self::$order ?: (self::$order = new OrderType());
     }
 
     public static function orderDetail(): OrderDetailType
