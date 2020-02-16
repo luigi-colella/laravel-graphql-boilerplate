@@ -10,7 +10,7 @@ class EmployeeTypeTest extends TestCase
     /**
      * @test
      */
-    public function graphql_endpoint_returns_employee_type_correctly()
+    public function graphql_endpoint_returns_employee_type()
     {
         $model = factory(Employee::class)->create();
 
@@ -32,5 +32,36 @@ class EmployeeTypeTest extends TestCase
         ])
             ->assertSuccessful()
             ->assertJsonPath('data.employee', $model->toArray());
+    }
+
+    /**
+     * @test
+     */
+    public function graphql_endpoint_returns_list_of_employee_type()
+    {
+        $model = factory(Employee::class)->create();
+
+        $json = $this->post(self::GRAPHQL_ENDPOINT, [
+            'query' => "
+                {
+                    employees {
+                        edges {
+                            node {
+                                employeeNumber
+                                lastName
+                                firstName
+                                extension
+                                email
+                                officeCode
+                                reportsTo
+                                jobTitle
+                            }
+                        }
+                    }
+                }
+            ",
+        ])
+            ->assertSuccessful()
+            ->assertJsonPath('data.employees.edges.0.node', $model->toArray());
     }
 }

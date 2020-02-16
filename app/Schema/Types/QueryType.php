@@ -5,7 +5,6 @@ namespace App\Schema\Types;
 use App\Models\Customer;
 use App\Models\Employee;
 use App\Schema\FieldRegistry;
-use App\Schema\ModelPaginator;
 use App\Schema\TypeRegistry;
 use GraphQL\Type\Definition\ObjectType;
 
@@ -31,6 +30,7 @@ class QueryType extends ObjectType
                 'customer' => FieldRegistry::model(TypeRegistry::customer(), Customer::class),
                 'customers' => FieldRegistry::models(TypeRegistry::customer(), Customer::class),
                 'employee' => FieldRegistry::model(TypeRegistry::employee(), Employee::class),
+                'employees' => FieldRegistry::models(TypeRegistry::employee(), Employee::class),
             ],
         ]);
     }
