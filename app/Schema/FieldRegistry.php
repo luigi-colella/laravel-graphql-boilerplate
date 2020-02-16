@@ -40,7 +40,7 @@ class FieldRegistry
      * 
      * @return array
      */
-    public static function models(Type $type, string $modelClass): array
+    public static function list(Type $type, string $modelClass): array
     {
         return [
             'type' => TypeRegistry::paginationOf($type),
