@@ -30,4 +30,32 @@ class OrderDetailTypeTest extends TestCase
             ->assertSuccessful()
             ->assertJsonPath('data.orderDetail', $model->toArray());
     }
+
+    /**
+     * @test
+     */
+    public function graphql_endpoint_returns_list_of_order_detail_type()
+    {
+        $model = factory(OrderDetail::class)->create();
+
+        $this->post(self::GRAPHQL_ENDPOINT, [
+            'query' => "
+                {
+                    orderDetails {
+                        edges {
+                            node {
+                                orderNumber
+                                productCode
+                                quantityOrdered
+                                priceEach
+                                orderLineNumber
+                            }
+                        }
+                    }
+                }
+            ",
+        ])
+            ->assertSuccessful()
+            ->assertJsonPath('data.orderDetails.edges.0.node', $model->toArray());
+    }
 }
