@@ -19,18 +19,6 @@ class QueryType extends ObjectType
         parent::__construct([
             'name' => 'Query',
             'fields' => [
-                'echo' => [
-                    'type' => TypeRegistry::string(),
-                    'args' => [
-                        'message' => [
-                            'type' => TypeRegistry::nonNull(TypeRegistry::string()),
-                            'description' => 'The message to display'
-                        ],
-                    ],
-                    'resolve' => function ($root, $args) {
-                        return $root['prefix'] . $args['message'];
-                    }
-                ],
                 'customer' => FieldRegistry::model(TypeRegistry::customer(), Customer::class),
                 'customers' => FieldRegistry::models(TypeRegistry::customer(), Customer::class),
                 'employee' => FieldRegistry::model(TypeRegistry::employee(), Employee::class),
