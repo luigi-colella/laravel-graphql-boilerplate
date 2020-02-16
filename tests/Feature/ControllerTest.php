@@ -109,7 +109,7 @@ class ExampleTest extends TestCase
      */
     public function graphql_endpoint_returns_a_list_of_models_with_has_next_page_field_equal_to_false()
     {
-        $model = factory(Customer::class)->create();
+        factory(Customer::class)->create();
 
         $this->post(self::GRAPHQL_ENDPOINT, [
             'query' => "
