@@ -8,6 +8,7 @@ use App\Models\Office;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\Payment;
+use App\Models\ProductLine;
 use App\Schema\FieldRegistry;
 use App\Schema\TypeRegistry;
 use GraphQL\Type\Definition\ObjectType;
@@ -31,6 +32,8 @@ class QueryType extends ObjectType
                 'orderDetails' => FieldRegistry::models(TypeRegistry::orderDetail(), OrderDetail::class),
                 'payment' => FieldRegistry::model(TypeRegistry::payment(), Payment::class),
                 'payments' => FieldRegistry::models(TypeRegistry::payment(), Payment::class),
+                'productLine' => FieldRegistry::model(TypeRegistry::productLine(), ProductLine::class),
+                'productLines' => FieldRegistry::models(TypeRegistry::productLine(), ProductLine::class),
             ],
         ]);
     }
