@@ -42,7 +42,7 @@ class officeTypeTest extends TestCase
     {
         $model = factory(Office::class)->create();
 
-        $json = $this->post(self::GRAPHQL_ENDPOINT, [
+        $this->post(self::GRAPHQL_ENDPOINT, [
             'query' => "
                 {
                     offices {
