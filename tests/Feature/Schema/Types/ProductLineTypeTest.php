@@ -10,7 +10,7 @@ class ProductLineTypeTest extends TestCase
     /**
      * @test
      */
-    public function graphql_endpoint_returns_product_line_type_correctly()
+    public function graphql_endpoint_returns_product_line_type()
     {
         $model = factory(ProductLine::class)->create();
 

@@ -10,7 +10,7 @@ class OrderTypeTest extends TestCase
     /**
      * @test
      */
-    public function graphql_endpoint_returns_order_type_correctly()
+    public function graphql_endpoint_returns_order_type()
     {
         $model = factory(Order::class)->create();
 

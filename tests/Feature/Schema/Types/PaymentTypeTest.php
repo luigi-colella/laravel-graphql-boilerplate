@@ -10,7 +10,7 @@ class PaymentTypeTest extends TestCase
     /**
      * @test
      */
-    public function graphql_endpoint_returns_payment_type_correctly()
+    public function graphql_endpoint_returns_payment_type()
     {
         $model = factory(Payment::class)->create();
 
