@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCustomerTable extends Migration
+class CreateCustomersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -28,7 +28,6 @@ class CreateCustomerTable extends Migration
             $table->string('salesRepEmployeeNumber', 11)->nullable();
             $table->decimal('creditLimit', 10,2)->nullable();
             
-            //$table->primary('customerNumber');
             //$table->foreign('salesRepEmployeeNumber')->references('employeeNumber')->on('employees');
 
             $table->engine = 'InnoDB';
