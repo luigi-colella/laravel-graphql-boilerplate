@@ -15,13 +15,13 @@ class TypeRegistry extends Type
      */
     private static $customer;
 
-    public static function customer(): CustomerType
-    {
-        return self::$customer ?: (self::$customer = new CustomerType());
-    }
-
     public static function paginationOf(Type $type): PaginationOfType
     {
         return new PaginationOfType($type);
+    }
+
+    public static function customer(): CustomerType
+    {
+        return self::$customer ?: (self::$customer = new CustomerType());
     }
 }
