@@ -40,6 +40,12 @@ Link | Description
 
 > If you installed Docker by Docker Toolbox, you may need to replace `localhost` with the ip returned by `docker-machine ip`.
 
+To run tests you can use
+
+```sh
+docker-compose exec app bash -c "vendor/bin/phpunit"
+```
+
 ## Credits
 
 The database dump was taken at https://www.mysqltutorial.org/mysql-sample-database.aspx.
