@@ -11,6 +11,9 @@ use GraphQL\Type\Definition\Type;
  */
 class TypeRegistry extends Type
 {
+    /** @var array */
+    private static $paginationOf = [];
+
     /** @var CustomerType */
     private static $customer;
 
@@ -19,7 +22,8 @@ class TypeRegistry extends Type
 
     public static function paginationOf(Type $type): PaginationOfType
     {
-        return new PaginationOfType($type);
+        $typeName = $type->toString();
+        return isset(self::$paginationOf[$typeName]) ? self::$paginationOf[$typeName] : (self::$paginationOf[$typeName] = new PaginationOfType($type));
     }
 
     public static function customer(): CustomerType

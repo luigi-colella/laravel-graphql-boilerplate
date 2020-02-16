@@ -13,6 +13,7 @@ class PaginationOfType extends ObjectType
     public function __construct(Type $type)
     {
         parent::__construct([
+            'name' => $type->toString() . 'List',
             'fields' => [
                 [
                     'name' => 'totalCount',
@@ -24,7 +25,7 @@ class PaginationOfType extends ObjectType
                 [
                     'name' => 'edges',
                     'type' => TypeRegistry::listOf(new ObjectType([
-                        'name' => 'edge',
+                        'name' => $type->toString() . 'Edge',
                         'fields' => [
                             [
                                 'name' => 'node',
@@ -49,7 +50,7 @@ class PaginationOfType extends ObjectType
                 [
                     'name' => 'pageInfo',
                     'type' => new ObjectType([
-                        'name' => 'pageInfo',
+                        'name' => $type->toString() . 'PageInfo',
                         'fields' => [
                             'endCursor' => TypeRegistry::id(),
                             'hasNextPage' => TypeRegistry::boolean(),
