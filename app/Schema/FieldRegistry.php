@@ -47,7 +47,7 @@ class FieldRegistry
             'args' => [
                 'after' => [
                     'type' => TypeRegistry::id(),
-                    'defaultValue' => 1,
+                    'defaultValue' => 0,
                     'description' => 'The offset after which records will be taken',
                 ],
                 'first' => [
