@@ -3,15 +3,10 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Customer;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
-    use RefreshDatabase;
-
-    CONST GRAPHQL_ENDPOINT = '/api/graphql';
-
     /**
      * @test
      */
@@ -40,7 +35,7 @@ class ExampleTest extends TestCase
         $this->post(self::GRAPHQL_ENDPOINT, [
             'query' => "
                 {
-                    customer (id: ". $model->customerNumber .") {
+                    customer (id: {$model->customerNumber}) {
                         customerName
                     }
                 }
@@ -64,7 +59,7 @@ class ExampleTest extends TestCase
         $this->post(self::GRAPHQL_ENDPOINT, [
             'query' => "
                 {
-                    customers (after: ". $model2->customerNumber .", first: 2) {
+                    customers (after: {$model2->customerNumber}, first: 2) {
                         totalCount
                         edges {
                             cursor
