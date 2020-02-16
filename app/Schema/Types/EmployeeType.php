@@ -10,7 +10,6 @@ class EmployeeType extends ObjectType
     public function __construct()
     {
         parent::__construct([
-            'name' => 'employee',
             'description' => 'Employee info',
             'fields' => [
                 'employeeNumber' => TypeRegistry::id(),

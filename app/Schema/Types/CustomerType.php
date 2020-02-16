@@ -10,7 +10,6 @@ class CustomerType extends ObjectType
     public function __construct()
     {
         parent::__construct([
-            'name' => 'customer',
             'description' => 'Customer info',
             'fields' => [
                 'customerNumber' => TypeRegistry::id(),
