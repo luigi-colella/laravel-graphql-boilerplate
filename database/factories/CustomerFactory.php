@@ -11,7 +11,7 @@ $factory->define(Customer::class, function (Faker $faker) {
         'contactLastName' => $faker->lastName,
         'contactFirstName' => $faker->name,
         'phone' => $faker->phoneNumber,
-        'addressLine1' => $faker->buildingNumber . ' '  . $faker->streetName,
+        'addressLine1' => $faker->address,
         'addressLine2' => $faker->secondaryAddress,
         'city' => $faker->city,
         'state' => $faker->state,	
