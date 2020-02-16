@@ -2,6 +2,7 @@
 namespace App\Schema;
 
 use App\Schema\Types\CustomerType;
+use App\Schema\Types\EmployeeType;
 use App\Schema\Types\PaginationOfType;
 use GraphQL\Type\Definition\Type;
 
@@ -10,10 +11,11 @@ use GraphQL\Type\Definition\Type;
  */
 class TypeRegistry extends Type
 {
-    /**
-     * @var CustomerType
-     */
+    /** @var CustomerType */
     private static $customer;
+
+    /** @var EmployeeType */
+    private static $employee;
 
     public static function paginationOf(Type $type): PaginationOfType
     {
@@ -23,5 +25,10 @@ class TypeRegistry extends Type
     public static function customer(): CustomerType
     {
         return self::$customer ?: (self::$customer = new CustomerType());
+    }
+
+    public static function employee(): EmployeeType
+    {
+        return self::$employee ?: (self::$employee = new EmployeeType());
     }
 }

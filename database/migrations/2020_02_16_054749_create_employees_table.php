@@ -20,7 +20,7 @@ class CreateEmployeesTable extends Migration
             $table->string('extension', 10);
             $table->string('email', 100);
             $table->string('officeCode', 10);
-            $table->integer('resportsTo');
+            $table->integer('reportsTo')->nullable();
             $table->string('jobTitle', 50);
         });
     }
