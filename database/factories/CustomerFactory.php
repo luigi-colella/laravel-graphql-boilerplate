@@ -3,6 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Models\Customer;
+use App\Models\Employee;
 use Faker\Generator as Faker;
 
 $factory->define(Customer::class, function (Faker $faker) {
@@ -17,7 +18,7 @@ $factory->define(Customer::class, function (Faker $faker) {
         'state' => $faker->state,	
         'postalCode' => $faker->postcode,
         'country' => $faker->country,
-        'salesRepEmployeeNumber' => null,
+        'salesRepEmployeeNumber' => factory(Employee::class),
         'creditLimit' => $faker->randomFloat(2),
     ];
 });

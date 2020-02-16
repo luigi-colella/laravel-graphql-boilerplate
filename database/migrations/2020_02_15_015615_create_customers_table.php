@@ -28,7 +28,7 @@ class CreateCustomersTable extends Migration
             $table->string('salesRepEmployeeNumber', 11)->nullable();
             $table->decimal('creditLimit', 10,2)->nullable();
             
-            //$table->foreign('salesRepEmployeeNumber')->references('employeeNumber')->on('employees');
+            $table->foreign('salesRepEmployeeNumber')->references('employeeNumber')->on('employees');
 
             $table->engine = 'InnoDB';
         });

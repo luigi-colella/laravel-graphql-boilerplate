@@ -25,6 +25,7 @@ class CustomerType extends ObjectType
                 'country' => TypeRegistry::string(),
                 'salesRepEmployeeNumber' => TypeRegistry::int(),
                 'creditLimit' => TypeRegistry::float(),
+                'salesRepEmployee' => TypeRegistry::employee(),
             ]
         ]);
     }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Customer extends Model
 {
@@ -46,4 +47,14 @@ class Customer extends Model
         'salesRepEmployeeNumber' => 'integer',
         'creditLimit' => 'float',
     ];
+
+    /**
+     * Get the sales rep employee record associated with the customer.
+     * 
+     * @return HasOne
+     */
+    public function salesRepEmployee(): HasOne
+    {
+        return $this->hasOne(Employee::class, 'employeeNumber', 'salesRepEmployeeNumber');
+    }
 }
