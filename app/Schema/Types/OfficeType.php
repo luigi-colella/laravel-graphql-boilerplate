@@ -22,6 +22,7 @@ class OfficeType extends ObjectType
                     'country' => TypeRegistry::int(),
                     'postalCode' => TypeRegistry::string(),
                     'territory' => TypeRegistry::string(),
+                    'employees' => TypeRegistry::listOf(TypeRegistry::employee()),
                 ];
             },
         ]);

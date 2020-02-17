@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Office extends Model
 {
@@ -42,4 +43,14 @@ class Office extends Model
         'postalCode' => 'string',
         'territory' => 'string',
     ];
+
+    /**
+     * Get the employees records associated with the office.
+     * 
+     * @return HasMany
+     */
+    public function employees(): HasMany
+    {
+        return $this->hasMany(Employee::class, 'officeCode', 'officeCode');
+    }
 }
