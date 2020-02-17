@@ -22,6 +22,7 @@ class ProductType extends ObjectType
                     'quantityInStock' => TypeRegistry::int(),
                     'buyPrice' => TypeRegistry::float(),
                     'MSRP' => TypeRegistry::float(),
+                    'orderDetail' => TypeRegistry::orderDetail(),
                 ];
             },
         ]);

@@ -3,6 +3,7 @@
 namespace Tests\Feature\Schema\Types;
 
 use App\Models\Order;
+use App\Models\OrderDetail;
 use Tests\TestCase;
 
 class OrderTypeTest extends TestCase
@@ -61,5 +62,37 @@ class OrderTypeTest extends TestCase
         ])
             ->assertSuccessful()
             ->assertJsonPath('data.orders.edges.0.node', $model->toArray());
+    }
+
+    /**
+     * @test
+     */
+    public function graphql_endpoint_returns_order_details_relationship_of_order_type()
+    {
+        $model = factory(Order::class)->create();
+        $relatedModel1 = factory(OrderDetail::class)->create();
+        $relatedModel1->orderNumber = $model->getKey();
+        $relatedModel1->save();
+        $relatedModel2 = factory(OrderDetail::class)->create(['orderNumber' => $model->getKey()]);
+        $relatedModel2->orderNumber = $model->getKey();
+        $relatedModel2->save();
+
+        $this->post(self::GRAPHQL_ENDPOINT, [
+            'query' => "
+                {
+                    order (id: {$model->getKey()}) {
+                        orderDetails {
+                            orderNumber
+                            productCode
+                            quantityOrdered
+                            priceEach
+                            orderLineNumber
+                        }
+                    }
+                }
+            ",
+        ])
+            ->assertSuccessful()
+            ->assertJsonPath('data.order.orderDetails', [$relatedModel1->toArray(), $relatedModel2->toArray()]);
     }
 }

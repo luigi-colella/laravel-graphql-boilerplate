@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Order extends Model
 {
@@ -40,4 +41,14 @@ class Order extends Model
         'comments' => 'string',
         'customerNumber' => 'integer',
     ];
+
+    /**
+     * Get the order detail record associated with the order.
+     * 
+     * @return HasMany
+     */
+    public function orderDetails(): HasMany
+    {
+        return $this->hasMany(OrderDetail::class, 'orderNumber', 'orderNumber');
+    }
 }

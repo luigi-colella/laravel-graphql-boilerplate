@@ -20,6 +20,7 @@ class OrderType extends ObjectType
                     'status' => TypeRegistry::string(),
                     'comments' => TypeRegistry::string(),
                     'customerNumber' => TypeRegistry::int(),
+                    'orderDetails' => TypeRegistry::listOf(TypeRegistry::orderDetail()),
                 ];
             },
         ]);

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Schema\Types;
 
+use App\Models\OrderDetail;
 use App\Models\Product;
 use Tests\TestCase;
 
@@ -65,5 +66,32 @@ class ProductTypeTest extends TestCase
         ])
             ->assertSuccessful()
             ->assertJsonPath('data.products.edges.0.node', $model->toArray());
+    }
+
+    /**
+     * @test
+     */
+    public function graphql_endpoint_returns_order_detail_relationship_of_product_type()
+    {
+        $relatedModel = factory(OrderDetail::class)->create();
+        $model = $relatedModel->product;
+
+        $this->post(self::GRAPHQL_ENDPOINT, [
+            'query' => "
+                {
+                    product (id: {$model->getKey()}) {
+                        orderDetail {
+                            orderNumber
+                            productCode
+                            quantityOrdered
+                            priceEach
+                            orderLineNumber
+                        }
+                    }
+                }
+            ",
+        ])
+            ->assertSuccessful()
+            ->assertJsonPath('data.product.orderDetail', $relatedModel->unsetRelation('product')->toArray());
     }
 }

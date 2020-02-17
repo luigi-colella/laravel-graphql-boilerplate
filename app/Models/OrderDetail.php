@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class OrderDetail extends Model
 {
@@ -38,4 +39,24 @@ class OrderDetail extends Model
         'priceEach' => 'float',
         'orderLineNumber' => 'integer',
     ];
+
+    /**
+     * Get the order record associated with the order detail.
+     * 
+     * @return HasOne
+     */
+    public function order(): HasOne
+    {
+        return $this->hasOne(Order::class, 'orderNumber', 'orderNumber');
+    }
+
+    /**
+     * Get the product record associated with the order detail.
+     * 
+     * @return HasOne
+     */
+    public function product(): HasOne
+    {
+        return $this->hasOne(Product::class, 'productCode', 'productCode');
+    }
 }

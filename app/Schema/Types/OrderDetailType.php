@@ -18,6 +18,8 @@ class OrderDetailType extends ObjectType
                     'quantityOrdered' => TypeRegistry::int(),
                     'priceEach' => TypeRegistry::float(),
                     'orderLineNumber' => TypeRegistry::int(),
+                    'order' => TypeRegistry::order(),
+                    'product' => TypeRegistry::product(),
                 ];
             },
         ]);
