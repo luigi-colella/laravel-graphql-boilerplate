@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Employee extends Model
 {
@@ -51,5 +52,15 @@ class Employee extends Model
     public function customers(): HasMany
     {
         return $this->hasMany(Customer::class, 'salesRepEmployeeNumber', 'employeeNumber');
+    }
+
+    /**
+     * Get the employee record associated with this one.
+     * 
+     * @return HasOne
+     */
+    public function manager(): HasOne
+    {
+        return $this->hasOne(Employee::class, 'employeeNumber', 'reportsTo');
     }
 }

@@ -23,6 +23,8 @@ class CreateEmployeesTable extends Migration
             $table->integer('reportsTo')->nullable();
             $table->string('jobTitle', 50);
 
+            $table->foreign('reportsTo')->references('employeeNumber')->on('employees');
+
             $table->engine = 'InnoDB';
         });
     }

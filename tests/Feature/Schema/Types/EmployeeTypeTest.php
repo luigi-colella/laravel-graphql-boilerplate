@@ -102,4 +102,36 @@ class EmployeeTypeTest extends TestCase
             ->assertSuccessful()
             ->assertJsonPath('data.employee.customers', [$relatedModel1->toArray(), $relatedModel2->toArray()]);
     }
+
+    /**
+     * @test
+     */
+    public function graphql_endpoint_returns_manager_relationship_of_employee_type()
+    {
+        $model = factory(Employee::class)->create();
+        $relatedModel = factory(Employee::class)->create();
+        $model->reportsTo = $relatedModel->getKey();
+        $model->save();
+
+        $this->post(self::GRAPHQL_ENDPOINT, [
+            'query' => "
+                {
+                    employee (id: {$model->getKey()}) {
+                        manager {
+                            employeeNumber
+                            lastName
+                            firstName
+                            extension
+                            email
+                            officeCode
+                            reportsTo
+                            jobTitle
+                        }
+                    }
+                }
+            ",
+        ])
+            ->assertSuccessful()
+            ->assertJsonPath('data.employee.manager', $relatedModel->toArray());
+    }
 }
