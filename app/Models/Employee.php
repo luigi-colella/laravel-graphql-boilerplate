@@ -63,4 +63,14 @@ class Employee extends Model
     {
         return $this->hasOne(Employee::class, 'employeeNumber', 'reportsTo');
     }
+
+    /**
+     * Get the office record associated with the employee.
+     * 
+     * @return HasOne
+     */
+    public function office(): HasOne
+    {
+        return $this->hasOne(Office::class, 'officeCode', 'officeCode');
+    }
 }

@@ -134,4 +134,34 @@ class EmployeeTypeTest extends TestCase
             ->assertSuccessful()
             ->assertJsonPath('data.employee.manager', $relatedModel->toArray());
     }
+
+    /**
+     * @test
+     */
+    public function graphql_endpoint_returns_office_relationship_of_employee_type()
+    {
+        $model = factory(Employee::class)->create();
+
+        $this->post(self::GRAPHQL_ENDPOINT, [
+            'query' => "
+                {
+                    employee (id: {$model->getKey()}) {
+                        office {
+                            officeCode
+                            city
+                            phone
+                            addressLine1
+                            addressLine2
+                            state
+                            country
+                            postalCode
+                            territory
+                        }
+                    }
+                }
+            ",
+        ])
+            ->assertSuccessful()
+            ->assertJsonPath('data.employee.office', $model->office->toArray());
+    }
 }

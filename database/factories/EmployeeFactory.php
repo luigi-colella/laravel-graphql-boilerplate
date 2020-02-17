@@ -3,6 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Models\Employee;
+use App\Models\Office;
 use Faker\Generator as Faker;
 
 $factory->define(Employee::class, function (Faker $faker) {
@@ -11,7 +12,7 @@ $factory->define(Employee::class, function (Faker $faker) {
         'firstName' => $faker->firstName,
         'extension' => $faker->word,
         'email' => $faker->email,
-        'officeCode' => $faker->word,
+        'officeCode' => factory(Office::class)->create(),
         'reportsTo' => null,
         'jobTitle' => $faker->jobTitle,
     ];

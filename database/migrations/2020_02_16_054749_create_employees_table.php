@@ -24,6 +24,7 @@ class CreateEmployeesTable extends Migration
             $table->string('jobTitle', 50);
 
             $table->foreign('reportsTo')->references('employeeNumber')->on('employees');
+            $table->foreign('officeCode')->references('officeCode')->on('offices');
 
             $table->engine = 'InnoDB';
         });
