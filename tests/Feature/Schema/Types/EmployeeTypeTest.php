@@ -42,7 +42,7 @@ class EmployeeTypeTest extends TestCase
     {
         $model = factory(Employee::class)->create();
 
-        $json = $this->post(self::GRAPHQL_ENDPOINT, [
+        $this->post(self::GRAPHQL_ENDPOINT, [
             'query' => "
                 {
                     employees {
