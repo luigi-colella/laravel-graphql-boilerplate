@@ -41,10 +41,9 @@ class EmployeeTypeTest extends TestCase
     public function graphql_endpoint_returns_customers_relationship_of_employee_type()
     {
         $model = factory(Employee::class)->create();
-        // create customers and associate them with employee
-        $customer1 = factory(Customer::class)->create();
-        $customer2 = factory(Customer::class)->create();
-        $model->customers()->saveMany([$customer1, $customer2]);
+        $relatedModel1 = factory(Customer::class)->create();
+        $relatedModel2 = factory(Customer::class)->create();
+        $model->customers()->saveMany([$relatedModel1, $relatedModel2]);
 
         $this->post(self::GRAPHQL_ENDPOINT, [
             'query' => "
@@ -70,7 +69,7 @@ class EmployeeTypeTest extends TestCase
             ",
         ])
             ->assertSuccessful()
-            ->assertJsonPath('data.employee.customers', [$customer1->toArray(), $customer2->toArray()]);
+            ->assertJsonPath('data.employee.customers', [$relatedModel1->toArray(), $relatedModel2->toArray()]);
     }
 
     /**
