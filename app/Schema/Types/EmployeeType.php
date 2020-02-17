@@ -11,16 +11,19 @@ class EmployeeType extends ObjectType
     {
         parent::__construct([
             'description' => 'Employee info',
-            'fields' => [
-                'employeeNumber' => TypeRegistry::id(),
-                'lastName' => TypeRegistry::string(),
-                'firstName' => TypeRegistry::string(),
-                'extension' => TypeRegistry::string(),
-                'email' => TypeRegistry::string(),
-                'officeCode' => TypeRegistry::string(),
-                'reportsTo' => TypeRegistry::int(),
-                'jobTitle' => TypeRegistry::string(),
-            ]
+            'fields' => function () {
+                return [
+                    'employeeNumber' => TypeRegistry::id(),
+                    'lastName' => TypeRegistry::string(),
+                    'firstName' => TypeRegistry::string(),
+                    'extension' => TypeRegistry::string(),
+                    'email' => TypeRegistry::string(),
+                    'officeCode' => TypeRegistry::string(),
+                    'reportsTo' => TypeRegistry::int(),
+                    'jobTitle' => TypeRegistry::string(),
+                    'customers' => TypeRegistry::listOf(TypeRegistry::customer()),
+                ];
+            }
         ]);
     }
 }
