@@ -42,7 +42,7 @@ class CustomerTypeTest extends TestCase
     /**
      * @test
      */
-    public function graphql_endpoint_returns_relationships_of_customer_type()
+    public function graphql_endpoint_returns_salesRepEmployee_relationship_of_customer_type()
     {
         $model = factory(Customer::class)->create();
 

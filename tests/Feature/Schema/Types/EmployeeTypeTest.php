@@ -38,7 +38,7 @@ class EmployeeTypeTest extends TestCase
     /**
      * @test
      */
-    public function graphql_endpoint_returns_relationships_of_employee_type()
+    public function graphql_endpoint_returns_customers_relationship_of_employee_type()
     {
         $model = factory(Employee::class)->create();
         // create customers and associate them with employee
