@@ -11,12 +11,14 @@ class PaymentType extends ObjectType
     {
         parent::__construct([
             'description' => 'Payment info',
-            'fields' => [
-                'customerNumber' => TypeRegistry::id(),
-                'checkNumber' => TypeRegistry::string(),
-                'paymentDate' => TypeRegistry::string(),
-                'amount' => TypeRegistry::float(),
-            ]
+            'fields' => function () {
+                return [
+                    'customerNumber' => TypeRegistry::id(),
+                    'checkNumber' => TypeRegistry::string(),
+                    'paymentDate' => TypeRegistry::string(),
+                    'amount' => TypeRegistry::float(),
+                ];
+            },
         ]);
     }
 }

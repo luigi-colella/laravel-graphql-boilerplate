@@ -23,7 +23,7 @@ class EmployeeType extends ObjectType
                     'jobTitle' => TypeRegistry::string(),
                     'customers' => TypeRegistry::listOf(TypeRegistry::customer()),
                 ];
-            }
+            },
         ]);
     }
 }

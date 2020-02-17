@@ -11,11 +11,13 @@ class ProductLineType extends ObjectType
     {
         parent::__construct([
             'description' => 'Product line info',
-            'fields' => [
-                'productLine' => TypeRegistry::id(),
-                'textDescription' => TypeRegistry::string(),
-                'htmlDescription' => TypeRegistry::string(),
-            ]
+            'fields' => function () {
+                return [
+                    'productLine' => TypeRegistry::id(),
+                    'textDescription' => TypeRegistry::string(),
+                    'htmlDescription' => TypeRegistry::string(),
+                ];
+            },
         ]);
     }
 }

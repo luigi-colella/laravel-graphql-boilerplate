@@ -11,13 +11,15 @@ class OrderDetailType extends ObjectType
     {
         parent::__construct([
             'description' => 'Order detail info',
-            'fields' => [
-                'orderNumber' => TypeRegistry::id(),
-                'productCode' => TypeRegistry::string(),
-                'quantityOrdered' => TypeRegistry::int(),
-                'priceEach' => TypeRegistry::float(),
-                'orderLineNumber' => TypeRegistry::int(),
-            ]
+            'fields' => function () {
+                return [
+                    'orderNumber' => TypeRegistry::id(),
+                    'productCode' => TypeRegistry::string(),
+                    'quantityOrdered' => TypeRegistry::int(),
+                    'priceEach' => TypeRegistry::float(),
+                    'orderLineNumber' => TypeRegistry::int(),
+                ];
+            },
         ]);
     }
 }
