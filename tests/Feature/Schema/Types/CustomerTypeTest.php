@@ -38,35 +38,6 @@ class CustomerTypeTest extends TestCase
             ->assertSuccessful()
             ->assertJsonPath('data.customer', $model->toArray());
     }
-    
-    /**
-     * @test
-     */
-    public function graphql_endpoint_returns_salesRepEmployee_relationship_of_customer_type()
-    {
-        $model = factory(Customer::class)->create();
-
-        $this->post(self::GRAPHQL_ENDPOINT, [
-            'query' => "
-                {
-                    customer (id: {$model->getKey()}) {
-                        salesRepEmployee {
-                            employeeNumber
-                            lastName
-                            firstName
-                            extension
-                            email
-                            officeCode
-                            reportsTo
-                            jobTitle
-                        }
-                    }
-                }
-            ",
-        ])
-            ->assertSuccessful()
-            ->assertJsonPath('data.customer.salesRepEmployee', $model->salesRepEmployee->toArray());
-    }
 
     /**
      * @test
@@ -102,5 +73,34 @@ class CustomerTypeTest extends TestCase
         ])
             ->assertSuccessful()
             ->assertJsonPath('data.customers.edges.0.node', $model->toArray());
+    }
+
+    /**
+     * @test
+     */
+    public function graphql_endpoint_returns_salesRepEmployee_relationship_of_customer_type()
+    {
+        $model = factory(Customer::class)->create();
+
+        $this->post(self::GRAPHQL_ENDPOINT, [
+            'query' => "
+                {
+                    customer (id: {$model->getKey()}) {
+                        salesRepEmployee {
+                            employeeNumber
+                            lastName
+                            firstName
+                            extension
+                            email
+                            officeCode
+                            reportsTo
+                            jobTitle
+                        }
+                    }
+                }
+            ",
+        ])
+            ->assertSuccessful()
+            ->assertJsonPath('data.customer.salesRepEmployee', $model->salesRepEmployee->toArray());
     }
 }
