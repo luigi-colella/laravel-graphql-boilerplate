@@ -14,7 +14,7 @@ class CreateProductsTable extends Migration
     public function up()
     {
         Schema::create('products', function (Blueprint $table) {
-            $table->bigIncrements('productCode');
+            $table->string('productCode');
             $table->string('productName', 70);
             $table->string('productLine', 50);
             $table->string('productScale', 10);
@@ -23,6 +23,10 @@ class CreateProductsTable extends Migration
             $table->integer('quantityInStock');
             $table->float('buyPrice', 10, 2);
             $table->float('MSRP', 10, 2);
+
+            $table->primary('productCode');
+
+            $table->foreign('productLine')->references('productLine')->on('productlines');
 
             $table->engine = 'InnoDB';
         });

@@ -22,6 +22,20 @@ class Product extends Model
     protected $primaryKey = 'productCode';
 
     /**
+     * The "type" of the primary key ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
+
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
      * Indicates if the model should be timestamped.
      * 
      * @var bool
@@ -52,5 +66,15 @@ class Product extends Model
     public function orderDetail(): HasOne
     {
         return $this->hasOne(OrderDetail::class, 'productCode', 'productCode');
+    }
+
+    /**
+     * Get the productLine record associated with the product.
+     * 
+     * @return HasOne
+     */
+    public function line(): HasOne
+    {
+        return $this->hasOne(ProductLine::class, 'productLine', 'productLine');
     }
 }

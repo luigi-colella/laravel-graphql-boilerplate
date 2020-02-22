@@ -4,6 +4,7 @@ namespace Tests\Feature\Schema\Types;
 
 use App\Models\OrderDetail;
 use App\Models\Product;
+use App\Models\ProductLine;
 use Tests\TestCase;
 
 class ProductTypeTest extends TestCase
@@ -18,7 +19,7 @@ class ProductTypeTest extends TestCase
         $this->post(self::GRAPHQL_ENDPOINT, [
             'query' => "
                 {
-                    product (id: {$model->getKey()}) {
+                    product (id: \"{$model->getKey()}\") {
                         productCode
                         productName
                         productLine
@@ -79,7 +80,7 @@ class ProductTypeTest extends TestCase
         $this->post(self::GRAPHQL_ENDPOINT, [
             'query' => "
                 {
-                    product (id: {$model->getKey()}) {
+                    product (id: \"{$model->getKey()}\") {
                         orderDetail {
                             orderNumber
                             productCode
@@ -93,5 +94,30 @@ class ProductTypeTest extends TestCase
         ])
             ->assertSuccessful()
             ->assertJsonPath('data.product.orderDetail', $relatedModel->unsetRelation('product')->toArray());
+    }
+
+    /**
+     * @test
+     */
+    public function graphql_endpoint_returns_line_relationship_of_product_type()
+    {
+        $relatedModel = factory(ProductLine::class)->create();
+        $model = factory(Product::class)->create(['productLine' => $relatedModel]);
+
+        $this->post(self::GRAPHQL_ENDPOINT, [
+            'query' => "
+                {
+                    product (id: \"{$model->getKey()}\") {
+                        line {
+                            productLine
+                            textDescription
+                            htmlDescription
+                        }
+                    }
+                }
+            ",
+        ])
+            ->assertSuccessful()
+            ->assertJsonPath('data.product.line', $relatedModel->toArray());
     }
 }
