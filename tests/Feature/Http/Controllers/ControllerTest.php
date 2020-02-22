@@ -22,7 +22,7 @@ class ExampleTest extends TestCase
             ',
         ])
             ->assertSuccessful()
-            ->assertJsonPath('errors.0.message', 'Field "customer" argument "id" of type "Int!" is required but not provided.');
+            ->assertJsonPath('errors.0.message', 'Field "customer" argument "id" of type "ID!" is required but not provided.');
     }
 
     /**

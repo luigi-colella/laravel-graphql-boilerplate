@@ -22,7 +22,7 @@ class FieldRegistry
             'type' => $type,
             'args' => [
                 'id' => [
-                    'type' => TypeRegistry::nonNull(TypeRegistry::int()),
+                    'type' => TypeRegistry::nonNull(TypeRegistry::id()),
                     'description' => 'The ID of model to fetch',
                 ],
             ],

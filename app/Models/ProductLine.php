@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProductLine extends Model
 {
@@ -21,6 +22,20 @@ class ProductLine extends Model
     protected $primaryKey = 'productLine';
 
     /**
+     * The "type" of the primary key ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
+
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
      * Indicates if the model should be timestamped.
      * 
      * @var bool
@@ -36,4 +51,14 @@ class ProductLine extends Model
         'textDescription' => 'string',
         'htmlDescription' => 'string',
     ];
+
+    /**
+     * Get the products record associated with the product line.
+     * 
+     * @return HasMany
+     */
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class, 'productLine', 'productLine');
+    }
 }

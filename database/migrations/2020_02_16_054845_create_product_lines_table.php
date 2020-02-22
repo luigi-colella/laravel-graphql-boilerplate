@@ -14,10 +14,12 @@ class CreateProductLinesTable extends Migration
     public function up()
     {
         Schema::create('productlines', function (Blueprint $table) {
-            $table->bigIncrements('productLine');
+            $table->string('productLine');
             $table->string('textDescription', 4000)->nullable();
             $table->text('htmlDescription')->nullable();
             $table->binary('image')->nullable();
+
+            $table->primary('productLine');
 
             $table->engine = 'InnoDB';
         });

@@ -13,9 +13,10 @@ class ProductLineType extends ObjectType
             'description' => 'Product line info',
             'fields' => function () {
                 return [
-                    'productLine' => TypeRegistry::id(),
+                    'productLine' => TypeRegistry::string(),
                     'textDescription' => TypeRegistry::string(),
                     'htmlDescription' => TypeRegistry::string(),
+                    'products' => TypeRegistry::listOf(TypeRegistry::product()),
                 ];
             },
         ]);
