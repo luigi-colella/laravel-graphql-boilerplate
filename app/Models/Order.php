@@ -50,7 +50,7 @@ class Order extends Model
      */
     public function orderDetails(): HasMany
     {
-        return $this->hasMany(OrderDetail::class, 'orderNumber', 'orderNumber');
+        return $this->hasMany(OrderDetail::class, 'orderNumber', 'orderNumber')->orderBy('productCode');
     }
 
     /**

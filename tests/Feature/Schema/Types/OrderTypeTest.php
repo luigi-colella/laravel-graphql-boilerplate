@@ -71,12 +71,10 @@ class OrderTypeTest extends TestCase
     public function graphql_endpoint_returns_order_details_relationship_of_order_type()
     {
         $model = factory(Order::class)->create();
-        $relatedModel1 = factory(OrderDetail::class)->create();
-        $relatedModel1->orderNumber = $model->getKey();
-        $relatedModel1->save();
+        $relatedModel1 = factory(OrderDetail::class)->create(['orderNumber' => $model->getKey()]);
         $relatedModel2 = factory(OrderDetail::class)->create(['orderNumber' => $model->getKey()]);
-        $relatedModel2->orderNumber = $model->getKey();
-        $relatedModel2->save();
+        $model->orderDetails()->saveMany([$relatedModel1, $relatedModel2]);
+        $expectedValue = collect([$relatedModel1, $relatedModel2])->sortBy('productCode')->values()->toArray();
 
         $this->post(self::GRAPHQL_ENDPOINT, [
             'query' => "
@@ -94,7 +92,7 @@ class OrderTypeTest extends TestCase
             ",
         ])
             ->assertSuccessful()
-            ->assertJsonPath('data.order.orderDetails', [$relatedModel1->toArray(), $relatedModel2->toArray()]);
+            ->assertJsonPath('data.order.orderDetails', $expectedValue);
     }
 
     /**
