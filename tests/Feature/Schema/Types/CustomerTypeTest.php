@@ -4,6 +4,7 @@ namespace Tests\Feature\Schema\Types;
 
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\Payment;
 use Tests\TestCase;
 
 class CustomerTypeTest extends TestCase
@@ -134,5 +135,33 @@ class CustomerTypeTest extends TestCase
         ])
             ->assertSuccessful()
             ->assertJsonPath('data.customer.orders', [$relatedModel1->toArray(), $relatedModel2->toArray()]);
+    }
+
+    /**
+     * @test
+     */
+    public function graphql_endpoint_returns_payments_relationship_of_customer_type()
+    {
+        $model = factory(Customer::class)->create();
+        $relatedModel1 = factory(Payment::class)->create(['customerNumber' => $model->getKey()]);
+        $relatedModel2 = factory(Payment::class)->create(['customerNumber' => $model->getKey()]);
+        $model->payments()->saveMany([$relatedModel1, $relatedModel2]);
+
+        $this->post(self::GRAPHQL_ENDPOINT, [
+            'query' => "
+                {
+                    customer (id: {$model->getKey()}) {
+                        payments {
+                            customerNumber
+                            checkNumber
+                            paymentDate
+                            amount
+                        }
+                    }
+                }
+            ",
+        ])
+            ->assertSuccessful()
+            ->assertJsonPath('data.customer.payments', [$relatedModel1->toArray(), $relatedModel2->toArray()]);
     }
 }

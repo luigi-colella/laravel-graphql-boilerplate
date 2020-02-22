@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Payment extends Model
 {
@@ -37,4 +38,14 @@ class Payment extends Model
         'paymentDate' => 'date',
         'amount' => 'float',
     ];
+
+    /**
+     * Get the product record associated with the order detail.
+     * 
+     * @return HasOne
+     */
+    public function customer(): HasOne
+    {
+        return $this->hasOne(Customer::class, 'customerNumber', 'customerNumber');
+    }
 }

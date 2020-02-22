@@ -17,6 +17,7 @@ class PaymentType extends ObjectType
                     'checkNumber' => TypeRegistry::string(),
                     'paymentDate' => TypeRegistry::string(),
                     'amount' => TypeRegistry::float(),
+                    'customer' => TypeRegistry::customer(),
                 ];
             },
         ]);

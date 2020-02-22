@@ -28,6 +28,7 @@ class CustomerType extends ObjectType
                     'creditLimit' => TypeRegistry::float(),
                     'salesRepEmployee' => TypeRegistry::employee(),
                     'orders' => TypeRegistry::listOf(TypeRegistry::order()),
+                    'payments' => TypeRegistry::listOf(TypeRegistry::payment()),
                 ];
             },
         ]);

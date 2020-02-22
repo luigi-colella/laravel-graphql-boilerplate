@@ -68,4 +68,14 @@ class Customer extends Model
     {
         return $this->hasMany(Order::class, 'customerNumber', 'customerNumber');
     }
+
+    /**
+     * Get the payment records associated with the customer.
+     * 
+     * @return HasMany
+     */
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class, 'customerNumber', 'customerNumber');
+    }
 }

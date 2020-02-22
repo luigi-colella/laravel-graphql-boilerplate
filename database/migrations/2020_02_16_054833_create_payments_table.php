@@ -14,10 +14,14 @@ class CreatePaymentsTable extends Migration
     public function up()
     {
         Schema::create('payments', function (Blueprint $table) {
-            $table->bigIncrements('customerNumber');
+            $table->integer('customerNumber');
             $table->string('checkNumber', 50);
             $table->date('paymentDate');
             $table->float('amount', 10, 2);
+
+            $table->primary(['customerNumber', 'checkNumber']);
+
+            $table->foreign('customerNumber')->references('customerNumber')->on('customers');
 
             $table->engine = 'InnoDB';
         });
