@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Order extends Model
 {
@@ -50,5 +51,15 @@ class Order extends Model
     public function orderDetails(): HasMany
     {
         return $this->hasMany(OrderDetail::class, 'orderNumber', 'orderNumber');
+    }
+
+    /**
+     * Get the customer record associated with the order.
+     * 
+     * @return HasOne
+     */
+    public function customer(): HasOne
+    {
+        return $this->hasOne(Customer::class, 'customerNumber', 'customerNumber');
     }
 }

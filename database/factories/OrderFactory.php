@@ -2,6 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Models\Customer;
 use App\Models\Order;
 use Faker\Generator as Faker;
 
@@ -12,6 +13,6 @@ $factory->define(Order::class, function (Faker $faker) {
         'shippedDate' => $faker->date,
         'status' => $faker->word,
         'comments' => $faker->sentence,
-        'customerNumber' => $faker->randomNumber(),
+        'customerNumber' => factory(Customer::class)->create(),
     ];
 });

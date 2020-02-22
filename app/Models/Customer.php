@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Customer extends Model
@@ -56,5 +57,15 @@ class Customer extends Model
     public function salesRepEmployee(): HasOne
     {
         return $this->hasOne(Employee::class, 'employeeNumber', 'salesRepEmployeeNumber');
+    }
+
+    /**
+     * Get the order records associated with the customer.
+     * 
+     * @return HasMany
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class, 'customerNumber', 'customerNumber');
     }
 }

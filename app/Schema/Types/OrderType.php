@@ -21,6 +21,7 @@ class OrderType extends ObjectType
                     'comments' => TypeRegistry::string(),
                     'customerNumber' => TypeRegistry::int(),
                     'orderDetails' => TypeRegistry::listOf(TypeRegistry::orderDetail()),
+                    'customer' => TypeRegistry::customer(),
                 ];
             },
         ]);
