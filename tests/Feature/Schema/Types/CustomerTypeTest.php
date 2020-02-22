@@ -143,8 +143,8 @@ class CustomerTypeTest extends TestCase
     public function graphql_endpoint_returns_payments_relationship_of_customer_type()
     {
         $model = factory(Customer::class)->create();
-        $relatedModel1 = factory(Payment::class)->create(['customerNumber' => $model->getKey()]);
-        $relatedModel2 = factory(Payment::class)->create(['customerNumber' => $model->getKey()]);
+        $relatedModel1 = factory(Payment::class)->create(['customerNumber' => $model->getKey(), 'checkNumber' => 'BO864823']);
+        $relatedModel2 = factory(Payment::class)->create(['customerNumber' => $model->getKey(), 'checkNumber' => 'JM555205']);
         $model->payments()->saveMany([$relatedModel1, $relatedModel2]);
 
         $this->post(self::GRAPHQL_ENDPOINT, [

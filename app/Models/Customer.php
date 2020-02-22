@@ -76,6 +76,6 @@ class Customer extends Model
      */
     public function payments(): HasMany
     {
-        return $this->hasMany(Payment::class, 'customerNumber', 'customerNumber');
+        return $this->hasMany(Payment::class, 'customerNumber', 'customerNumber')->orderBy('checkNumber');
     }
 }
