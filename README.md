@@ -34,6 +34,7 @@ Then the following endpoints will be available:
 Link | Description
 ---  | ---
 [localhost:8000](http://localhost:8000) | Laravel application home
+[localhost:8000/logs](http://localhost:8000/logs) | Laravel Log Viewer
 [localhost:8000/graphql](http://localhost:8000/graphql) | GraphQL endpoint
 [localhost:4000](http://localhost:3000) | GraphQL Playground, a tool to test and explore the schema
 [localhost:8080](http:localhost:8080) | Adminer, a visual database manager
