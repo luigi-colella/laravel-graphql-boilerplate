@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
             DB::listen(function (QueryExecuted $query) {
                 $time = $query->time;
                 $query = vsprintf(str_replace('?', '%s', $query->sql), $query->bindings);
-                Log::info("A query was executed in {$time}s: \"{$query}\"");
+                Log::info("A query was executed in {$time}ms: \"{$query}\"");
             });
         }
     }
