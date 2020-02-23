@@ -9,14 +9,14 @@ use GraphQL\Type\Definition\Type;
 class FieldRegistry
 {
     /**
-     * Return the schema field for a single model
+     * Return the schema field for a single model at the root of schema
      * 
      * @param Type $type
      * @param string $modelClass
      * 
      * @return array
      */
-    public static function model(Type $type, string $modelClass): array
+    public static function rootModel(Type $type, string $modelClass): array
     {
         return [
             'type' => $type,
@@ -33,14 +33,14 @@ class FieldRegistry
     }
 
     /**
-     * Return the schema field for a list of models
+     * Return the schema field for a list of models at the root of schema
      * 
      * @param Type $type
      * @param string $modelClass
      * 
      * @return array
      */
-    public static function list(Type $type, string $modelClass): array
+    public static function rootList(Type $type, string $modelClass): array
     {
         return [
             'type' => TypeRegistry::paginationOf($type),
