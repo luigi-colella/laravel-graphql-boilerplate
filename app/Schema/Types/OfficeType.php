@@ -2,6 +2,7 @@
 
 namespace App\Schema\Types;
 
+use App\Schema\FieldRegistry;
 use App\Schema\TypeRegistry;
 use GraphQL\Type\Definition\ObjectType;
 
@@ -22,7 +23,7 @@ class OfficeType extends ObjectType
                     'country' => TypeRegistry::int(),
                     'postalCode' => TypeRegistry::string(),
                     'territory' => TypeRegistry::string(),
-                    'employees' => TypeRegistry::listOf(TypeRegistry::employee()),
+                    'employees' => FieldRegistry::relation(TypeRegistry::listOf(TypeRegistry::employee())),
                 ];
             },
         ]);

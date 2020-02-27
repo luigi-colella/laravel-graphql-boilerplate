@@ -30,9 +30,9 @@ class ModelLoader
      * @param Model $model
      * @param string $relation
      * 
-     * @return Model
+     * @return Model|\Illuminate\Database\Eloquent\Collection
      */
-    public static function load(Model $model, string $relation): Model
+    public static function load(Model $model, string $relation)
     {
         $collection = new Collection(self::$models[$model->getTable()]);
         $collection->loadMissing($relation);

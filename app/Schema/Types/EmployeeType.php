@@ -22,7 +22,7 @@ class EmployeeType extends ObjectType
                     'officeCode' => TypeRegistry::string(),
                     'reportsTo' => TypeRegistry::int(),
                     'jobTitle' => TypeRegistry::string(),
-                    'customers' => TypeRegistry::listOf(TypeRegistry::customer()),
+                    'customers' => FieldRegistry::relation(TypeRegistry::listOf(TypeRegistry::customer())),
                     'manager' => FieldRegistry::relation(TypeRegistry::employee()),
                     'office' => FieldRegistry::relation(TypeRegistry::office()),
                 ];
