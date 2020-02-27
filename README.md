@@ -1,5 +1,5 @@
 # Laravel GraphQL Boilerplate
-Web application boilerplate built with Laravel and GraphQL
+A backend boilerplate built with Laravel and GraphQL
 
 ## Summary
 
@@ -29,7 +29,7 @@ docker-compose up -d # start app and other services
 docker-compose exec app bash -c "composer install" # install app's dependencies
 ```
 
-Then the following endpoints will be available:
+After the following endpoints will be available:
 
 Link | Description
 ---  | ---
@@ -39,12 +39,19 @@ Link | Description
 [localhost:4000](http://localhost:3000) | GraphQL Playground, a tool to test and explore the schema
 [localhost:8080](http:localhost:8080) | Adminer, a visual database manager
 
-> If you installed Docker by Docker Toolbox, you may need to replace `localhost` with the ip returned by `docker-machine ip`.
+> If you have installed Docker by Docker Toolbox, you may need to replace `localhost` with the ip returned by `docker-machine ip`.
 
 To run tests you can use
 
 ```sh
 docker-compose exec app bash -c "vendor/bin/phpunit"
+```
+
+You can also run commands directly from within the container of the application, e.g.
+
+```
+docker-compose exec app bash
+root@3d8128e36f18:/var/www/app# vendor/bin/phpunit
 ```
 
 ## Credits
