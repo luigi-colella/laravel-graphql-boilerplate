@@ -2,6 +2,7 @@
 
 namespace App\Schema\Types;
 
+use App\Schema\FieldRegistry;
 use App\Schema\TypeRegistry;
 use GraphQL\Type\Definition\ObjectType;
 
@@ -17,7 +18,7 @@ class PaymentType extends ObjectType
                     'checkNumber' => TypeRegistry::string(),
                     'paymentDate' => TypeRegistry::string(),
                     'amount' => TypeRegistry::float(),
-                    'customer' => TypeRegistry::customer(),
+                    'customer' => FieldRegistry::relation(TypeRegistry::customer()),
                 ];
             },
         ]);

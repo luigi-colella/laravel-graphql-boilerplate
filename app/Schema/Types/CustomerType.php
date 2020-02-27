@@ -2,6 +2,7 @@
 
 namespace App\Schema\Types;
 
+use App\Schema\FieldRegistry;
 use App\Schema\TypeRegistry;
 use GraphQL\Type\Definition\ObjectType;
 
@@ -26,7 +27,7 @@ class CustomerType extends ObjectType
                     'country' => TypeRegistry::string(),
                     'salesRepEmployeeNumber' => TypeRegistry::int(),
                     'creditLimit' => TypeRegistry::float(),
-                    'salesRepEmployee' => TypeRegistry::employee(),
+                    'salesRepEmployee' => FieldRegistry::relation(TypeRegistry::employee()),
                     'orders' => TypeRegistry::listOf(TypeRegistry::order()),
                     'payments' => TypeRegistry::listOf(TypeRegistry::payment()),
                 ];

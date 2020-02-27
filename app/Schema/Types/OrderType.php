@@ -2,6 +2,7 @@
 
 namespace App\Schema\Types;
 
+use App\Schema\FieldRegistry;
 use App\Schema\TypeRegistry;
 use GraphQL\Type\Definition\ObjectType;
 
@@ -21,7 +22,7 @@ class OrderType extends ObjectType
                     'comments' => TypeRegistry::string(),
                     'customerNumber' => TypeRegistry::int(),
                     'orderDetails' => TypeRegistry::listOf(TypeRegistry::orderDetail()),
-                    'customer' => TypeRegistry::customer(),
+                    'customer' => FieldRegistry::relation(TypeRegistry::customer()),
                 ];
             },
         ]);

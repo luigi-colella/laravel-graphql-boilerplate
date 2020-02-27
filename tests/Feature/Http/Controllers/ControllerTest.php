@@ -3,9 +3,10 @@
 namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Customer;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
-class ExampleTest extends TestCase
+class ControllerTest extends TestCase
 {
     /**
      * @test
@@ -122,5 +123,41 @@ class ExampleTest extends TestCase
         ])
             ->assertSuccessful()
             ->assertJsonPath('data.customers.pageInfo.hasNextPage', false);
+    }
+
+    /**
+     * @test
+     */
+    public function graphql_endpoint_batches_database_queries()
+    {
+        $city1 = factory(Customer::class)->create()->salesRepEmployee->office->city;
+        $city2 = factory(Customer::class)->create()->salesRepEmployee->office->city;
+        $city3 = factory(Customer::class)->create()->salesRepEmployee->office->city;
+
+        DB::enableQueryLog();
+
+        $this->post(self::GRAPHQL_ENDPOINT, [
+            'query' => "
+                {
+                    customers {
+                        edges {
+                            node {
+                                salesRepEmployee {
+                                    office {
+                                        city
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ",
+        ])
+            ->assertSuccessful()
+            ->assertJsonPath('data.customers.edges.0.node.salesRepEmployee.office.city', $city1)
+            ->assertJsonPath('data.customers.edges.1.node.salesRepEmployee.office.city', $city2)
+            ->assertJsonPath('data.customers.edges.2.node.salesRepEmployee.office.city', $city3);
+
+        $this->assertCount(3, DB::getQueryLog());
     }
 }

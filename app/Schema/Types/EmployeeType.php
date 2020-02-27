@@ -2,6 +2,7 @@
 
 namespace App\Schema\Types;
 
+use App\Schema\FieldRegistry;
 use App\Schema\TypeRegistry;
 use GraphQL\Type\Definition\ObjectType;
 
@@ -22,8 +23,8 @@ class EmployeeType extends ObjectType
                     'reportsTo' => TypeRegistry::int(),
                     'jobTitle' => TypeRegistry::string(),
                     'customers' => TypeRegistry::listOf(TypeRegistry::customer()),
-                    'manager' => TypeRegistry::employee(),
-                    'office' => TypeRegistry::office(),
+                    'manager' => FieldRegistry::relation(TypeRegistry::employee()),
+                    'office' => FieldRegistry::relation(TypeRegistry::office()),
                 ];
             },
         ]);

@@ -2,6 +2,7 @@
 
 namespace App\Schema\Types;
 
+use App\Schema\FieldRegistry;
 use App\Schema\TypeRegistry;
 use GraphQL\Type\Definition\ObjectType;
 
@@ -22,8 +23,8 @@ class ProductType extends ObjectType
                     'quantityInStock' => TypeRegistry::int(),
                     'buyPrice' => TypeRegistry::float(),
                     'MSRP' => TypeRegistry::float(),
-                    'orderDetail' => TypeRegistry::orderDetail(),
-                    'line' => TypeRegistry::productLine(),
+                    'orderDetail' => FieldRegistry::relation(TypeRegistry::orderDetail()),
+                    'line' => FieldRegistry::relation(TypeRegistry::productLine()),
                 ];
             },
         ]);

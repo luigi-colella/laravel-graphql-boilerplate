@@ -2,6 +2,7 @@
 
 namespace App\Schema\Types;
 
+use App\Schema\FieldRegistry;
 use App\Schema\TypeRegistry;
 use GraphQL\Type\Definition\ObjectType;
 
@@ -18,8 +19,8 @@ class OrderDetailType extends ObjectType
                     'quantityOrdered' => TypeRegistry::int(),
                     'priceEach' => TypeRegistry::float(),
                     'orderLineNumber' => TypeRegistry::int(),
-                    'order' => TypeRegistry::order(),
-                    'product' => TypeRegistry::product(),
+                    'order' => FieldRegistry::relation(TypeRegistry::order()),
+                    'product' => FieldRegistry::relation(TypeRegistry::product()),
                 ];
             },
         ]);
