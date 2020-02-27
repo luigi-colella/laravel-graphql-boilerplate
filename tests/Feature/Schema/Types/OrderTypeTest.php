@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Schema\Types;
 
-use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use Tests\TestCase;
