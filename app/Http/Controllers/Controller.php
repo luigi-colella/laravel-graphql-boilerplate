@@ -28,9 +28,8 @@ class Controller extends BaseController
         try {
             $schema = new Schema();
             $query = $request->get('query');
-            $rootValue = ['prefix' => 'You said: '];
             $variableValues = $request->get('variables');
-            $output = GraphQL::executeQuery($schema, $query, $rootValue, null, $variableValues)->toArray();
+            $output = GraphQL::executeQuery($schema, $query, null, null, $variableValues)->toArray();
         } catch (Exception $e) {
             $output = [
                 'errors' => [
