@@ -25,8 +25,8 @@ A backend boilerplate built with Laravel and GraphQL
 Start the application by using
 
 ```sh
-docker-compose up -d # start app and other services
-docker-compose exec app bash -c "composer install" # install app's dependencies
+docker-compose up -d # start docker services
+docker-compose exec app bash -c "./scripts/install.sh" # install app's dependencies and start it
 ```
 
 After the following endpoints will be available:
