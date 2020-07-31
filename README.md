@@ -3,10 +3,15 @@ A backend boilerplate built with Laravel and GraphQL
 
 ## Summary
 
+- [Demo](#demo)
 - [Stack](#stack)
 - [Requirements](#requirements)
 - [Setup](#setup)
 - [Credits](#credits)
+
+## Demo
+
+![Demo](https://raw.githubusercontent.com/lgcolella/laravel-graphql-boilerplate/master/repository/demo.gif "Demo")
 
 ## Stack
 
